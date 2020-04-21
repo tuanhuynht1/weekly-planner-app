@@ -1,0 +1,23 @@
+{
+  "name": "weekly-planner-app",
+  "version": "1.0.0",
+  "description": "Weekly planner web app using PERN stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuanhuynht1/weekly-planner-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuanhuynht1/weekly-planner-app/issues"
+  },
+  "homepage": "https://github.com/tuanhuynht1/weekly-planner-app#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.0.2"
+  }
+}
