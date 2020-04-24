@@ -20,10 +20,15 @@ class Database {
     }
 
     async getAllTodos(){
-        const res = await this.pool.query(
-            `INSERT INTO todos (description) VALUES ('${description}')`
-        );
-        return res;
+        try{
+            const res = await this.pool.query(
+                `SELECT * FROM todos;`
+            );
+            return res.rows; // return the row just inserted as JSON
+        } catch(err){
+            console.log(err);
+            return err.name; // will return 'error'
+        }
     }
     
 

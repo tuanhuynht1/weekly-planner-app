@@ -10,15 +10,18 @@ const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/planner
 // production build
 // app.use(express.static(path.join(__dirname,'/client/build')));
 
-/* API 
---------------------------------------------------------------------------------------*/
 
+// GET all todos 
+app.get('/todos', async (req,res) =>{
+    const results = await pg.getAllTodos();
+    res.send(results);
+})
 
-
-// GET all todos '/todos'
-
-
-
+// POST new todo
+app.post('/todos', async (req,res) => {
+    const { description } = req.body;
+    res.send(await pg.addNewTodo(description));
+})
 
 const port = process.env.PORT || 5000;
 app.listen(port, async () => { 
