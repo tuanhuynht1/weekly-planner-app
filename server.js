@@ -13,10 +13,14 @@ const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/planner
 /* API 
 --------------------------------------------------------------------------------------*/
 
+
+
 // GET all todos '/todos'
 
 
 
 
 const port = process.env.PORT || 5000;
-app.listen(port, async () => console.log('listening to port:',port));
+app.listen(port, async () => { 
+    console.log('listening to port:',port);
+});

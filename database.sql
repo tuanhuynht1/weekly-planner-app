@@ -1,0 +1,8 @@
+CREATE DATABASE planner;
+
+CREATE TABLE todos(
+    tid SERIAL PRIMARY KEY,
+    description VARCHAR(255),
+    assigned_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    completed BOOLEAN DEFAULT FALSE
+);
