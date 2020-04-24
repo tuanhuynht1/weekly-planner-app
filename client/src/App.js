@@ -3,7 +3,6 @@ import QuickAdd from './components/QuickAdd';
 import Todos from './components/Todos';
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
-import './styles.css';
 
 function App() {
 
