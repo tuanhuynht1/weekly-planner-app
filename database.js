@@ -8,7 +8,8 @@ class Database {
     }
 
     async test(){
-        return await this.pool.query('SELECT 420;');
+        const res = await this.pool.query('SELECT 420;');
+        return res.rows;
     }
 
 }

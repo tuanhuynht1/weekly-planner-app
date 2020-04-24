@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const Database = require('./database');
 
 const app = express();
 
@@ -9,4 +10,8 @@ const app = express();
 
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log('listening to port:',port));
+app.listen(port, async () => {
+    console.log('listening to port:',port);
+    const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/perntodo');
+    console.log(await pg.test());
+});
