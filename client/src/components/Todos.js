@@ -20,7 +20,6 @@ const Todos = () => {
 					<li key={todo.tid}>{todo.description}</li>
 				)}
 			</ul>
-			
 		</div>
 	);
 };
