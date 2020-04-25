@@ -1,24 +1,14 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import TodoItem from './TodoItem';
 
-const Todos = () => {
 
-	const [list, setList] = useState([]);
-
-	axios
-	.get('/todos')
-	.then(res => {
-		setList(res.data);
-	})
-	.catch(console.error);
+const Todos = ({list}) => {
 
 	return (
-		<div>
+		<div className='todo-container'>
 			<h2>Todos</h2>
 			<ul>
-				{list.map( todo => 
-					<li key={todo.tid}>{todo.description}</li>
-				)}
+				{list.map( (todo,i) => <TodoItem todo={todo} key={i}/>)}
 			</ul>
 		</div>
 	);

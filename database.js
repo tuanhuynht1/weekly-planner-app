@@ -7,10 +7,11 @@ class Database {
         })
     }
 
-    async addNewTodo(description){
+    async addNewTodo(description,assigned_date){
         try{
             const res = await this.pool.query(
-                `INSERT INTO todos (description) VALUES ('${description}') RETURNING *`
+                `INSERT INTO todos (description,assigned_date) 
+                VALUES ('${description}','${assigned_date}') RETURNING *`
             );
             return res.rows[0]; // return the row just inserted as JSON
         } catch(err){
@@ -22,7 +23,20 @@ class Database {
     async getAllTodos(){
         try{
             const res = await this.pool.query(
-                `SELECT * FROM todos;`
+                `SELECT * FROM todos ORDER BY tid;`
+            );
+            return res.rows; // return the row just inserted as JSON
+        } catch(err){
+            console.log(err);
+            return err.name; // will return 'error'
+        }
+    }
+
+    async getTodos(date){
+        try{
+            const res = await this.pool.query(
+                `SELECT * FROM todos
+                WHERE assigned_date = '${date}';`
             );
             return res.rows; // return the row just inserted as JSON
         } catch(err){
@@ -31,6 +45,20 @@ class Database {
         }
     }
     
+    async toggleTodoStatus(tid){
+        try{
+            const res = await this.pool.query(
+                `UPDATE todos
+                SET completed = NOT completed
+                WHERE tid = ${tid}
+                RETURNING *;`
+            );
+            return res.rows[0]; // return the row just updated as JSON
+        } catch(err){
+            console.log(err);
+            return err.name; // will return 'error'
+        }
+    }
 
 }
 

@@ -1,6 +1,12 @@
 /*
     Globals
 ---------------------------------------------------------------------------*/
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,32 +15,76 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 :root {
   --main-bg-color: #333;
 }
-
-
-
+.main-content {
+  text-align: center;
+}
 
 /*
     NavBar
 ---------------------------------------------------------------------------*/
 .navbar{
   background-color: var(--main-bg-color);
+  justify-content: center;
+}
+.nav-item-ongoing{
+  background-color: white;
+}
+.nav-item-past{
+  background-color: lightgray;
+}
+.nav-item-selected {
+  border-bottom: thick solid blue;
 }
 
+/*
+    QuickAdd
+---------------------------------------------------------------------------*/
+.quickadd-input {
+  width: 40%;
+}
 
 /*
-  Containers
+  Todos
 ---------------------------------------------------------------------------*/
-
-
+.todo-container {
+  width: 60%;
+  margin: 0 auto;
+  text-align: left;
+  border: thin solid black;
+}
+.todo-container h2{
+  font-size: 16pt;
+  text-align: left;
+  border-bottom: thin solid black;
+  margin: 0;
+  padding: 2px 10px;
+}
+.todo-container ul{
+  padding: 0;
+  margin: 0;
+}
+.todo-item {
+  width: 100%;
+  list-style-type: none;
+  border-top: thin solid black;
+  padding: 3px 10px;
+}
+.completed {
+  text-decoration: line-through;
+}
+.todo-item input{
+  float: right;
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+}
 
 /*
   Footer

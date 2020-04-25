@@ -1,10 +1,18 @@
 import React from 'react';
 
-const Footer = () => {
+const Footer = ({list}) => {
+
+	let completed = 0;
+	for(let i = 0; i < list.length; i++){
+		if(list[i].completed === true){
+			completed++;
+		}
+	}
+
 	return (
 		<div className='footer'>
 			<button>Overdues</button>
-            <h3>Progress Bar |||||||||||||||||--------------------------------------------> 2/7</h3>
+			<h3>{completed}/{list.length}</h3>
 		</div>
 	);
 };

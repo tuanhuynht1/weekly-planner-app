@@ -9,18 +9,36 @@ const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/planner
 --------------------------------------------------------------------------------------*/
 // production build
 // app.use(express.static(path.join(__dirname,'/client/build')));
-
+app.use(express.json());
 
 // GET all todos 
 app.get('/todos', async (req,res) =>{
     const results = await pg.getAllTodos();
-    res.send(results);
+    console.log(results);
+    if(results !== 'error'){
+        res.send(results);
+    }
 })
 
 // POST new todo
-app.post('/todos', async (req,res) => {
+app.post('/todos/:date', async (req,res) => {
+    const { date } = req.params;
     const { description } = req.body;
-    res.send(await pg.addNewTodo(description));
+    const results = await pg.addNewTodo(description,date);
+    console.log(results);
+    if(results !== 'error'){
+        res.send(results);
+    }
+})
+
+// PUT toggle todo status
+app.put('/todos/toggle-status/:tid', async (req,res) => {
+    const { tid } = req.params;
+    const results = await pg.toggleTodoStatus(tid);
+    console.log(results);
+    if(results !== 'error'){
+        res.send(results);
+    }
 })
 
 const port = process.env.PORT || 5000;
