@@ -13,6 +13,7 @@ class App extends Component {
       list: [],
       view_date: new Date(),
       progress_count: 0,
+      progress_length: 0,
     }
     this.addToList = this.addToList.bind(this);
     this.getTodos = this.getTodos.bind(this);
@@ -68,8 +69,11 @@ class App extends Component {
           completed++;
         }
       }
-      // set progress count
-      this.setState({progress_count: completed});
+      // set progress count and length
+      this.setState({
+        progress_count: completed,
+        progress_length: current_list.length,
+      });
     })
     .catch(console.error);
   }
@@ -94,7 +98,7 @@ class App extends Component {
 
 
   render(){
-    const { today, list, view_date, progress_count } = this.state;
+    const { today, list, view_date, progress_count, progress_length } = this.state;
   
     // parse date object 
     const date = view_date.getDate();
@@ -117,7 +121,7 @@ class App extends Component {
             <div style={{marginTop:'40px'}}>No todos scheduled for today...</div>
           }
         </div>
-        <Footer count={progress_count} total={list.length}/>
+        <Footer count={progress_count} total={progress_length}/>
       </Fragment>
     )
   }

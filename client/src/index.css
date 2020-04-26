@@ -126,6 +126,25 @@ code {
 .footer button {
   float: left;
 }
+.progress-bar-container {
+  display: inline-block;
+  height: 20px;
+  width: 90%;
+  background-color: lightgray;
+  margin: 5px 10px;
+  vertical-align: middle;
+  border-radius: 10px;
+}
+.progress-bar {
+  background-color: rgb(69, 193, 235);
+  height: 12px;
+  margin: 4px 3px;
+  vertical-align: middle;
+  border-radius: 6px;
+  min-width: 1%;
+  max-width: 99%;
+  width: 0%;
+}
 
 
 
