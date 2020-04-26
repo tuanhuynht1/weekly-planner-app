@@ -2,8 +2,11 @@ const express = require('express');
 const path = require('path');
 const Database = require('./database');
 const app = express();
-// const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/planner');
-const pg = new Database(process.env.DATABASE_URL); // production build
+
+const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:TT__tt7674@localhost:5432/planner';
+
+const pg = new Database(connectionString);
+// const pg = new Database(process.env.DATABASE_URL); // production build
 
 /* middleware 
 --------------------------------------------------------------------------------------*/
