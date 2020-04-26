@@ -8,7 +8,7 @@ const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/planner
 /* middleware 
 --------------------------------------------------------------------------------------*/
 // production build
-// app.use(express.static(path.join(__dirname,'/client/build')));
+app.use(express.static(path.join(__dirname,'/client/build')));
 app.use(express.json());
 
 // GET all todos 
