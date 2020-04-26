@@ -69,6 +69,8 @@ code {
   border: thin solid black;
   border-bottom: medium solid black;
   border-right: medium solid black;
+  max-height: 45vw;
+  overflow-y: auto;
 }
 .todo-container h2{
   font-size: 16pt;
@@ -104,6 +106,7 @@ code {
   text-align: center;
   font-weight: 900;
   color: darkred;
+  cursor: pointer;
 }
 
 /*

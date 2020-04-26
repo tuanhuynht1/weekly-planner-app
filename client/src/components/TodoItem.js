@@ -17,20 +17,29 @@ const TodoItem = ({todo, updateProgress}) => {
         .put(`/todos/toggle-status/${todo.tid}`)
         // .then(res => console.log(res.data))
 		.catch(console.error);
-	}
+    }
 
+    const onDelete = () => {
+        axios
+        .delete(`/todos/${todo.tid}`)
+        .then(()=> {
+            window.location = '/';
+        })
+        .catch(console.error);
+    }
+    
 	return (
         completed ?
             <li className='todo-item completed'>
                 {todo.description}
                 <input type='checkbox' onClick={e => toggle(e)} defaultChecked={todo.completed}/>
-                <span className='todo-delete'>&times;</span>
+                <span className='todo-delete' onClick={onDelete}>&times;</span>
             </li>
         :
             <li className='todo-item'>
                 {todo.description}
                 <input type='checkbox' onClick={e => toggle(e)}/>
-                <span className='todo-delete'>&times;</span>
+                <span className='todo-delete' onClick={onDelete}>&times;</span>
             </li>
 	);
 };

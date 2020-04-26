@@ -12,17 +12,19 @@ class App extends Component {
       today: new Date(),
       list: [],
       view_date: new Date(),
-      progress_count: 0
+      progress_count: 0,
     }
     this.addToList = this.addToList.bind(this);
     this.getTodos = this.getTodos.bind(this);
     this.switchView = this.switchView.bind(this);
     this.updateProgress = this.updateProgress.bind(this);
   }
+
   // call this when app renders
   componentDidMount(){
-    this.getTodos();  // get all todos
+    this.getTodos();  // get all todos and set progress count
   }
+
   // convert getMonth() to string for rendering
   monthToString(month){
     switch(month){
@@ -32,6 +34,7 @@ class App extends Component {
       default: return '';
     }
   }
+
   // convert date object to yyyy-mm-dd string (postgres format)
   dateToString(date){
     const dd = String(date.getDate()).padStart(2, '0');
@@ -39,12 +42,14 @@ class App extends Component {
     const yyyy = date.getFullYear();
     return yyyy + '-' + mm + '-' + dd;
   }
+
   // add a tempory todo to local memory while waiting on insert to database (pass down to QuickAdd)
   addToList(todo){
     this.setState({
       list: [...this.state.list, todo]
     });
   }
+
   // get all todos and set it to list
   getTodos(){
     axios
@@ -63,12 +68,13 @@ class App extends Component {
           completed++;
         }
       }
-      
+      // set progress count
       this.setState({progress_count: completed});
     })
     .catch(console.error);
   }
-  // switch view
+
+  // switch view when navItem is pressed
   switchView(date_offset){
     let date = new Date();
     date.setDate(date.getDate()+date_offset);
@@ -78,6 +84,7 @@ class App extends Component {
     })
     this.getTodos();
   }
+
   // increment or decrement progress
   updateProgress(change){
     this.setState({

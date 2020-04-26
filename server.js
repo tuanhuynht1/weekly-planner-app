@@ -41,6 +41,16 @@ app.put('/todos/toggle-status/:tid', async (req,res) => {
     }
 })
 
+// DELETE specific todo
+app.delete('/todos/:tid', async (req,res) => {
+    const { tid } = req.params;
+    const results = await pg.deleteTodo(tid);
+    console.log(results);
+    if(results !== 'error'){
+        res.send(results);
+    }
+})
+
 const port = process.env.PORT || 5000;
 app.listen(port, async () => { 
     console.log('listening to port:',port);

@@ -19,7 +19,7 @@ const QuickAdd = ({addToList, getTodos, date_string}) => {
 				description: input
 			})
 			.then(res => {
-				console.log(res.data);
+				// console.log(res.data);
 				getTodos();	// update list
 			})
 			.catch(console.error);

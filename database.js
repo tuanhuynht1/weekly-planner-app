@@ -60,6 +60,20 @@ class Database {
         }
     }
 
+    async deleteTodo(tid){
+        try{
+            const res = await this.pool.query(
+                `DELETE FROM todos
+                WHERE tid = ${tid}
+                RETURNING *;`
+            );
+            return res.rows[0]; // return the row just updated as JSON
+        } catch(err){
+            console.log(err);
+            return err.name; // will return 'error'
+        }
+    }
+
 }
 
 module.exports = Database;
