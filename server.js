@@ -3,20 +3,14 @@ const path = require('path');
 const Database = require('./database');
 const app = express();
 
+// Connect to database
 const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:TT__tt7674@localhost:5432/planner';
-
 const pg = new Database(connectionString);
-// const pg = new Database(process.env.DATABASE_URL); // production build
 
 /* middleware 
 --------------------------------------------------------------------------------------*/
-// production build
-app.use(express.static(path.join(__dirname,'/client/build')));
+app.use(express.static(path.join(__dirname,'/client/build'))); // production build
 app.use(express.json());
-
-app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname+'client/build/index.html'));
-})
 
 // GET all todos 
 app.get('/todos', async (req,res) =>{
@@ -56,6 +50,11 @@ app.delete('/todos/:tid', async (req,res) => {
     if(results !== 'error'){
         res.send(results);
     }
+})
+
+// All other routes will be rendered by React
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname+'client/build/index.html'));
 })
 
 const port = process.env.PORT || 5000;
