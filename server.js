@@ -11,6 +11,10 @@ const pg = new Database('postgresql://postgres:TT__tt7674@localhost:5432/planner
 app.use(express.static(path.join(__dirname,'/client/build')));
 app.use(express.json());
 
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname+'client/build/index.html'));
+})
+
 // GET all todos 
 app.get('/todos', async (req,res) =>{
     const results = await pg.getAllTodos();
