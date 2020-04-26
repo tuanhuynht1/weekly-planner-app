@@ -11,11 +11,13 @@ class App extends Component {
     this.state = {
       today: new Date(),
       list: [],
-      view_date: new Date()
+      view_date: new Date(),
+      progress_count: 0
     }
     this.addToList = this.addToList.bind(this);
     this.getTodos = this.getTodos.bind(this);
     this.switchView = this.switchView.bind(this);
+    this.updateProgress = this.updateProgress.bind(this);
   }
   // call this when app renders
   componentDidMount(){
@@ -51,6 +53,18 @@ class App extends Component {
       this.setState({
         list: res.data
       });
+
+      // calculate the number of todos already checked
+      const {view_date, list} = this.state;
+      const current_list = list.filter(todo => todo.assigned_date.substring(0,10) === this.dateToString(view_date));
+      let completed = 0;
+      for(let i = 0; i < current_list.length; i++){
+        if(current_list[i].completed === true){
+          completed++;
+        }
+      }
+      
+      this.setState({progress_count: completed});
     })
     .catch(console.error);
   }
@@ -64,10 +78,17 @@ class App extends Component {
     })
     this.getTodos();
   }
+  // increment or decrement progress
+  updateProgress(change){
+    this.setState({
+      progress_count: this.state.progress_count + change
+    })
+  }
+
 
   render(){
-    const { today, list, view_date } = this.state;
-
+    const { today, list, view_date, progress_count } = this.state;
+  
     // parse date object 
     const date = view_date.getDate();
     const month = view_date.getMonth(); // [Jan,Dec] -> [0,11] 
@@ -76,15 +97,20 @@ class App extends Component {
     // filter list to only include current todos
     const current_list = list.filter(todo => todo.assigned_date.substring(0,10) === this.dateToString(view_date));
 
+
     return (
       <Fragment>
         <NavBar view_date={view_date} today={today} switchView={this.switchView}/>
         <div className='main-content'>
           <h1>{this.monthToString(month)  + ' ' + date + ', ' + year}</h1>
           <QuickAdd addToList={this.addToList} getTodos={this.getTodos} date_string={this.dateToString(view_date)}/>
-          <Todos list={current_list} />
+          { current_list.length !== 0 ?
+            <Todos list={current_list} updateProgress={this.updateProgress}/>
+          :
+            <div style={{marginTop:'40px'}}>No todos scheduled for today...</div>
+          }
         </div>
-        <Footer list={current_list}/>
+        <Footer count={progress_count} total={list.length}/>
       </Fragment>
     )
   }

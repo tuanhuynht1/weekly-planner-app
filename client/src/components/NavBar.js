@@ -7,7 +7,6 @@ const NavBar = ({today, switchView, view_date}) => {
     const view_day = view_date.getDay();
 	return (
 		<div className='navbar'>
-            <h3>{current_day}</h3>
             <NavItem selected={view_day === 0} offset={0 - current_day} name={'SUN'} switchView={switchView}/>
             <NavItem selected={view_day === 1} offset={1 - current_day} name={'MON'} switchView={switchView}/>
             <NavItem selected={view_day === 2} offset={2 - current_day} name={'TUE'} switchView={switchView}/>
