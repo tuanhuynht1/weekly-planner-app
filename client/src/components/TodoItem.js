@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const TodoItem = ({todo, updateProgress}) => {
+const TodoItem = ({todo, updateProgress, theme}) => {
 
     const [completed,setCompleted] = useState(todo.completed);
 
@@ -30,13 +30,13 @@ const TodoItem = ({todo, updateProgress}) => {
     
 	return (
         completed ?
-            <li className='todo-item completed'>
+            <li className='todo-item completed' style={{backgroundColor: theme}}>
                 {todo.description}
                 <input type='checkbox' onClick={e => toggle(e)} defaultChecked={todo.completed}/>
                 <span className='todo-delete' onClick={onDelete}>&times;</span>
             </li>
         :
-            <li className='todo-item'>
+            <li className='todo-item' style={{backgroundColor: theme}}>
                 {todo.description}
                 <input type='checkbox' onClick={e => toggle(e)}/>
                 <span className='todo-delete' onClick={onDelete}>&times;</span>

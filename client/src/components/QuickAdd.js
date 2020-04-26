@@ -29,7 +29,7 @@ const QuickAdd = ({addToList, getTodos, date_string}) => {
 	return (
 		<form onSubmit={submitTodo}>
 			<input type='text' className='quickadd-input' value={input} onChange={updateInput} placeholder='Enter new Todo!'/>
-			<button type='submit'>Quick Add</button>
+			<button className='quickadd-input-button' type='submit'>Quick Add</button>
 		</form>
 	);
 };
