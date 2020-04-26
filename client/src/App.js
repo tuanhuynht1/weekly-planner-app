@@ -118,7 +118,7 @@ class App extends Component {
           { current_list.length !== 0 ?
             <Todos list={current_list} updateProgress={this.updateProgress}/>
           :
-            <div style={{marginTop:'40px'}}>No todos scheduled for today...</div>
+            <div style={{marginTop:'40px', fontFamily:'cursive'}}>No todos scheduled for today...</div>
           }
         </div>
         <Footer count={progress_count} total={progress_length}/>
